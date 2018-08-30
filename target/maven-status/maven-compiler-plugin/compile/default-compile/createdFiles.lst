@@ -1,0 +1,5 @@
+br\com\crud\entity\Estado.class
+br\com\crud\entity\Endereco.class
+br\com\crud\entity\Cidade.class
+br\com\crud\entity\Funcionario.class
+br\com\crud\entity\Cargo.class
