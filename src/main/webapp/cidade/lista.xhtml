@@ -1,0 +1,43 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    template="/template/padrao.xhtml">
+    <ui:define name="centro">
+
+        <p:fieldset legend="Lista de Cidades" style="margin-top: 10px;">
+            <h:form>
+                <p:dataTable  id="cidades" paginator="true" value="#{cidadeMB.listar()}" var="cidade" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="20,30,50,100" selection="#{cidadeMB.cidade}" rowKey="#{cidade.id}" rowIndexVar="item" emptyMessage="Nada foi encontrado." >
+                    <p:column headerText="Selection" selectionMode="single" style="width:16px;text-align:center" width="0"/> 
+                    
+                    <p:column headerText="Descrição" width="150">
+                        <h:outputText value="#{cidade.cidade}" />
+                    </p:column>
+                    
+                    <p:column headerText="Sigla" width="150">
+                        <h:outputText value="#{cidade.uf.sigla}" />
+                    </p:column>
+                    
+                    <p:column style="width:12px;text-align: center" width="2" headerText="Editar" >
+                        <p:button style="width:30px; height:27px;" value="" title="Editar" href="/cidade/cadastro.xhtml?id=#{cidade.id}"  icon="ui-icon-pencil"/>
+                    </p:column> 
+         
+                    <f:facet name="footer">
+                        <div style="height: 25px;" >
+                            <p:commandButton value="Novo" action="/cidade/cadastro.xhtml" style="float: left;" icon="ui-icon-plus"/>
+                            <p:commandButton value="Excluir" actionListener="#{cidadeMB.deletar()}" style="float: left;" action="/cargo/lista.xhtml" update="@form :mensagens" icon="ui-icon-trash">
+                                <p:confirm header="Confirmação" message="Deseja excluir o objeto cidade??" icon="ui-icon-alert" />
+                             </p:commandButton>
+                        </div>
+                    </f:facet>
+                    
+                </p:dataTable>
+            </h:form>
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>

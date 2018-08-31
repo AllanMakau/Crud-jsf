@@ -48,13 +48,8 @@ public class CargoMB implements Serializable{
     
     public List<Cargo> listar(){
         
-        cargos = cargodao.obterLista();
-        return cargos;
-    }
-    
-    public void obterLista(){
         
-        cargodao.obterLista();
+        return cargodao.obterLista();
     }
     
     public String cadastrarAtualizar(){
