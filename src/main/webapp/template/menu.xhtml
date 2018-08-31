@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <h:graphicImage url="/resources/img/processo_index.png"/> 
+    <h:form>
+        <p:menu style="width: auto">
+            <p:submenu label="Admin">
+                <p:menuitem value="Funcionario" url="/sms/sms.xhtml" />
+                <p:menuitem value="Cargo" url="/cargo/lista.xhtml" />
+
+            </p:submenu>
+            <p:submenu label="Operador">
+                <p:menuitem value="Sair" url="/logout"/>
+            </p:submenu>
+            <p:submenu label="Sair">
+                <p:menuitem value="Sair" url="/logout"/>
+            </p:submenu>
+        </p:menu>
+    </h:form>
+</ui:composition>

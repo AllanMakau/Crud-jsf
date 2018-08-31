@@ -1,0 +1,35 @@
+/* 
+    Document   : style
+    Created on : Feb 13, 2017, 11:00:06 AM
+    Author     : Alan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    background-color: #eeeeee; 
+    font-size: 12px;
+}
+.container{
+    position: absolute;
+    bottom: 8px;
+    left:0px;
+}
+.ui-menu .ui-menuitem-text{
+    text-align: left;
+}
+
+.ui-paginator{
+    text-align: left !important;
+}
+
+.ui-fieldset{
+    text-align: left;
+}
+
+.bt-action{
+    height: 25px !important; 
+    display: block !important; 
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    float:left !important;
+}
