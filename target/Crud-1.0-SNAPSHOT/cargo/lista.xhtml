@@ -11,20 +11,23 @@
 
         <p:fieldset legend="Lista de Cargos" style="margin-top: 10px;">
             <h:form>
-                <p:dataTable  id="cargos" paginator="true" value="#{cargoMB.listar()}" var="cargo" paginatorPosition="bottom" rows="20" rowsPerPageTemplate="20,30,50,100" rowIndexVar="item" emptyMessage="Nada foi encontrado." >
-
+                <p:dataTable  id="cargos" paginator="true" value="#{cargoMB.listar()}" var="cargo" paginatorPosition="bottom" rows="10" rowsPerPageTemplate="20,30,50,100" selection="#{cargoMB.cargo}" rowKey="#{cargo.id}" rowIndexVar="item" emptyMessage="Nada foi encontrado." >
+                    <p:column headerText="Selection" selectionMode="single" style="width:16px;text-align:center" width="0"/> 
+                    
                     <p:column headerText="Descrição" width="150">
                         <h:outputText value="#{cargo.nome}" />
                     </p:column>
-                   
-                    <p:column style="width:32px;text-align: center" headerText="Editar" >
+                    
+                    <p:column style="width:12px;text-align: center" width="2" headerText="Editar" >
                         <p:button style="width:30px; height:27px;" value="" title="Editar" href="/cargo/cadastro.xhtml?id=#{cargo.id}"  icon="ui-icon-pencil"/>
                     </p:column> 
-                    
-
+         
                     <f:facet name="footer">
-                        <div style="height: 25px;" > 
+                        <div style="height: 25px;" >
                             <p:commandButton value="Novo" action="/cargo/cadastro.xhtml" style="float: left;" icon="ui-icon-plus"/>
+                             <p:commandButton value="Excluir" actionListener="#{cargoMB.deletar()}" style="float: left;" action="/cargo/lista.xhtml" update="@form :mensagens" icon="ui-icon-trash">
+                                <p:confirm header="Confirmação" message="Deseja excluir o objeto cargo??" icon="ui-icon-alert" />
+                             </p:commandButton>
                         </div>
                     </f:facet>
                     

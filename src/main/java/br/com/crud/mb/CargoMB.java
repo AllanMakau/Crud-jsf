@@ -57,25 +57,26 @@ public class CargoMB implements Serializable{
         cargodao.obterLista();
     }
     
-    public void cadastrarAtualizar(){
+    public String cadastrarAtualizar(){
         try {
             if(cargo.getId() != null){
                 cargodao.alterar(cargo);
-               // return "cadastro.xhtml";
+                 Mensagem.lancar("Cargo atualizado com sucesso");
             } else {
                 cargodao.inserir(cargo);
-              //  return "lista.xhtml";
+                Mensagem.lancar("Cargo Cadastro com sucesso"); 
             }
         } catch (Exception e) {
             Mensagem.lancar("Erro ao cadastrar ou atualizar um Cargo.");
         }
-       // return "lista.xhtml";
+        return "lista.xhtml";
     }
+    
     
     public String deletar(){
         try {
             cargodao.excluir(cargo);
-            return "lista.xhtml";
+            Mensagem.lancar("Cargo excluido com sucesso");;
         } catch (Exception e) {
             Mensagem.lancar("Erro ao excluir um Cargo.");
         }
