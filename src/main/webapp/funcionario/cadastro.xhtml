@@ -1,0 +1,217 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:flem="http://java.sun.com/jsf/composite/components"
+    template="/template/padrao.xhtml">
+
+
+    <ui:define name="centro">
+
+        <h:form id="form" enctype="multipart/form-data">
+            <p:fieldset legend="Cadastro de Funcionários" style="margin-top: 10px;">
+
+                <p:tabView id="tabView">
+                    
+                    
+                    <p:tab title="Dados Pessoais">
+                        <table>
+                            <tr>
+                                <td>Nome</td>
+                                <td>
+                                    <p:inputText value="#{funcionarioMB.funcionario.nome}" id="nome" style="width: 450px;" />
+                                    <p:message for="nome"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CPF</td>
+                                <td>
+                                    <p:inputText value="#{funcionarioMB.funcionario.cpf}" id="cpf" style="width: 450px;">
+                                    </p:inputText>
+                                    <p:message for="cpf"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Data de Nascimento</td>
+                                <td>
+                                    <p:calendar value="#{funcionarioMB.funcionario.dtNascimento}" id="dtnascimento" style="width: 450px;" pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                    <p:message for="dtnascimento"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cargo</td>
+                                <td>
+                                    <p:selectOneMenu value="#{funcionarioMB.funcionario.cargo}" id="cargo" converter="#{genericConverter}" >  
+                                        <f:selectItems value="#{funcionarioMB.cargos}" var="cargo" itemLabel="#{cargo.nome}" />
+                                    </p:selectOneMenu>
+                                    <p:message for="cargo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                            <td>Sexo</td> 
+                                <td>
+                                    <p:selectOneMenu id="console" value="#{funcionarioMB.funcionario.sexo}" style="width:125px">
+                                        <f:selectItem itemLabel="Select" itemValue="" />
+                                        <f:selectItem itemLabel="Masculino" itemValue="1" />
+                                        <f:selectItem itemLabel="Feminino" itemValue="2" />
+                                        <f:selectItem itemLabel="Não se Aplica" itemValue="3" />
+                                    </p:selectOneMenu>
+                                </td> 
+                            </tr> 
+                        </table>
+                    </p:tab>
+                    
+                    <p:tab title="Contato">
+                        <table>
+                            <tr>
+                                <td>Email</td>
+                                <td>
+                                    <p:inputText value="#{funcionarioMB.funcionario.email}" id="email" style="width: 450px;" />
+                                    <p:message for="email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Telefone</td>
+                                <td>
+                                    <p:inputText value="#{funcionarioMB.funcionario.telefone}" id="tel" style="width: 450px;">
+                                    </p:inputText>
+                                    <p:message for="tel"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Celular</td>
+                                <td>
+                                    <p:inputText value="#{funcionarioMB.funcionario.celular}" id="cel" style="width: 450px;">
+                                    </p:inputText>
+                                    <p:message for="cel"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </p:tab>
+                    <p:tab title="Endereços">
+                        <p:dataTable value="#{funcionarioMB.funcionario.enderecos}" var="endereco" emptyMessage="" id="endTable" sortOrder="descending">
+                           
+                            <p:column headerText="Cep" >
+                                <h:outputText value="#{endereco.cep}" />
+                            </p:column>
+                            
+                            <p:column headerText="Uf" >
+                                <h:outputText value="#{endereco.cidade.uf.sigla}" />
+                            </p:column>
+                            
+                            <p:column headerText="Cidade" >
+                                <h:outputText value="#{endereco.cidade.cidade}" />
+                            </p:column>
+                            
+                            <p:column headerText="Endereço" >
+                                <h:outputText value="#{endereco.endereco}" />
+                            </p:column>
+                            
+                            <p:column headerText="Bairro" >
+                                <h:outputText value="#{endereco.bairro}" />
+                            </p:column>
+                            
+                            <p:column headerText="Número" >
+                                <h:outputText value="#{endereco.numero}" />
+                            </p:column>
+                            
+                            <p:column headerText="Complemento" >
+                                <h:outputText value="#{endereco.complemento}" />
+                            </p:column>
+                            
+                            <p:column style="width:25px">
+                                <p:commandButton icon="ui-icon-trash" actionListener="#{funcionarioMB.funcionario.enderecos.remove(endereco)}" rendered="#{endereco.id == null}" update="endTable" process="@this" />
+                                <p:commandButton icon="ui-icon-pencil" actionListener="#{funcionarioMB.setEndereco(endereco)}" process="@this" oncomplete="PF('endDialog').show()" update="idEndDialog" />
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo" actionListener="#{funcionarioMB.novoEndereco()}" process="@this" oncomplete="PF('endDialog').show()" update="idEndDialog" />
+                            </f:facet>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+               
+            </p:fieldset>
+
+                <span style="float: left; background-color: #EEEEEE; text-align: left;">
+                    <p:commandButton id="botaoSalvar" action="#{funcionarioMB.cadastrarAtualizar()}" value="Salvar" icon="ui-icon-disk" />
+                </span>
+        
+        </h:form>
+        
+        
+        
+        
+         <p:dialog widgetVar="endDialog" modal="true" resizable="false" appendTo="@(body)" id="idEndDialog" >
+            <h:form id="endDialog">
+                <p:panelGrid>
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Cep"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{funcionarioMB.endereco.cep}" id="cep" style="width: 100px;">
+                            </p:inputText>
+                            <p:message for="cep"/>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Endereço"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{funcionarioMB.endereco.endereco}" id="end" style="width: 100px;">
+                            </p:inputText>
+                            <p:message for="end"/>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Bairro"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{funcionarioMB.endereco.bairro}" id="bairro" style="width: 100px;">
+                            </p:inputText>
+                            <p:message for="bairro"/>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Número"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{funcionarioMB.endereco.numero}" id="numero" style="width: 100px;">
+                            </p:inputText>
+                            <p:message for="numero"/>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Complemento"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{funcionarioMB.endereco.complemento}" id="complemento" style="width: 100px;">
+                            </p:inputText>
+                            <p:message for="complemento"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:commandButton value="Adicionar Endereço" update=":endDialog :form:tabView:endTable"  actionListener="#{funcionarioMB.adicionarEndereco()}" oncomplete="if(args &amp;&amp; !args.validationFailed){PF('endDialog').hide()}" rendered="#{funcionarioMB.endereco.id == null}"/>
+                            <p:commandButton value="Alterar" update=":endDialog :form:tabView:endTable"  oncomplete="if(args &amp;&amp; !args.validationFailed){PF('endDialog').hide()}" rendered="#{funcionarioMB.endereco != null}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
+
+

@@ -6,13 +6,25 @@
 package br.com.crud.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Alan
  */
+@Inheritance(strategy = InheritanceType.JOINED)
+@Entity
 public class Endereco implements Serializable {
     
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
     private String endereco;
     private String complemento;
@@ -20,7 +32,10 @@ public class Endereco implements Serializable {
     private String numero;
     private String bairro;
     
+    @ManyToOne
     private Cidade cidade;
+    @ManyToOne()
+    private Funcionario funcionario;
 
     public Endereco() {
     }
@@ -79,6 +94,14 @@ public class Endereco implements Serializable {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
     
     

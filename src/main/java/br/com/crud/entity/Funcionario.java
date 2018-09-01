@@ -6,7 +6,19 @@
 package br.com.crud.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
+
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+
 
 /**
  *
@@ -14,18 +26,36 @@ import java.util.List;
  */
 
 
+@Entity
 public class Funcionario implements Serializable{
     
+    
+    @Id
+    @GeneratedValue( strategy =GenerationType.IDENTITY)
     private Integer id;
     
     private String nome;
     
+    private String sexo;
+  
     private String cpf;
+    
+    @ManyToOne
+    private Cargo cargo;
+    
+ 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dtNascimento;
+    
+    private String telefone;
+    
+    private String celular;
     
     private String email;
     
-    private Cargo cargo;
+
     
+    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "funcionario")
     private List<Endereco> enderecos;
 
     public Funcionario() {
@@ -78,6 +108,41 @@ public class Funcionario implements Serializable{
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Date getDtNascimento() {
+        return dtNascimento;
+    }
+
+    public void setDtNascimento(Date dtNascimento) {
+        this.dtNascimento = dtNascimento;
+    }
+
+   
+ 
     
     
     
