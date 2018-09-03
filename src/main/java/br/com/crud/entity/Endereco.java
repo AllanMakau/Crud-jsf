@@ -6,7 +6,6 @@
 package br.com.crud.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,15 +25,21 @@ public class Endereco implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    
     private String endereco;
+    
     private String complemento;
+    
     private String cep;
+    
     private String numero;
+    
     private String bairro;
     
     @ManyToOne
     private Cidade cidade;
-    @ManyToOne()
+    @ManyToOne
     private Funcionario funcionario;
 
     public Endereco() {

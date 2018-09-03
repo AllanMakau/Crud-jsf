@@ -7,9 +7,12 @@ package br.com.crud.mb;
 
 import br.com.crud.dao.CargoDao;
 import br.com.crud.dao.EnderecoDao;
+import br.com.crud.dao.EstadoDao;
 import br.com.crud.dao.FuncionarioDao;
 import br.com.crud.entity.Cargo;
+import br.com.crud.entity.Cidade;
 import br.com.crud.entity.Endereco;
+import br.com.crud.entity.Estado;
 import br.com.crud.entity.Funcionario;
 import br.com.crud.enums.Sexo;
 import br.com.crud.util.Mensagem;
@@ -39,13 +42,15 @@ public class FuncionarioMB implements Serializable{
     @ManagedProperty(value = "#{cargoDao}")
     private CargoDao cargoDao;
     
-    @ManagedProperty(value = "#{EnderecoDao}")
+    @ManagedProperty(value = "#{enderecoDao}")
     private EnderecoDao enderecoDao;
     
     private Endereco endereco;
     
     private List<Cargo> cargos;
     
+    
+    private Cidade cidade;
     
     private Funcionario funcionario;
     

@@ -18,6 +18,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 
 /**
@@ -34,16 +38,19 @@ public class Funcionario implements Serializable{
     @GeneratedValue( strategy =GenerationType.IDENTITY)
     private Integer id;
     
+    @Size(min = 7, max = 70, message = "{funcionario.nome.size}")
     private String nome;
     
+    @NotEmpty(message = "{funcionario.sexo.notempty}")
     private String sexo;
   
+    @CPF(message = "{funcionario.cpf.cpf}")
+    @NotEmpty(message = "{funcionario.cpf.notempty}")
     private String cpf;
     
     @ManyToOne
     private Cargo cargo;
     
- 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dtNascimento;
     
@@ -51,6 +58,7 @@ public class Funcionario implements Serializable{
     
     private String celular;
     
+    @Email(message = "{funcionario.email.email}")
     private String email;
     
 

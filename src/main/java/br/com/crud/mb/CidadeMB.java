@@ -10,7 +10,6 @@ import br.com.crud.dao.EstadoDao;
 import br.com.crud.entity.Cidade;
 import br.com.crud.entity.Estado;
 import br.com.crud.util.Mensagem;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

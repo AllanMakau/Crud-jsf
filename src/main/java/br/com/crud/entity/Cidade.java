@@ -5,11 +5,15 @@
  */
 package br.com.crud.entity;
 
+
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
 
 /**
  *
@@ -22,7 +26,12 @@ public class Cidade implements  Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "{cidade.nome.notempty}")
     private String cidade;
+    
+    @ManyToOne
+    private Estado estado;
+    
     
     private Estado uf;
 

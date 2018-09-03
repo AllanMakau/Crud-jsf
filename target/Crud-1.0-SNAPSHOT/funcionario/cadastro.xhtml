@@ -13,6 +13,7 @@
     <ui:define name="centro">
 
         <h:form id="form" enctype="multipart/form-data">
+             <p:growl id="growl" showDetail="false" sticky="true" />
             <p:fieldset legend="Cadastro de Funcionários" style="margin-top: 10px;">
 
                 <p:tabView id="tabView">
@@ -30,15 +31,15 @@
                             <tr>
                                 <td>CPF</td>
                                 <td>
-                                    <p:inputText value="#{funcionarioMB.funcionario.cpf}" id="cpf" style="width: 450px;">
-                                    </p:inputText>
+                                    <p:inputMask value="#{funcionarioMB.funcionario.cpf}" id="cpf" mask="999.999.999-99" style="width: 150px;"/>
+                                    
                                     <p:message for="cpf"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Data de Nascimento</td>
                                 <td>
-                                    <p:calendar value="#{funcionarioMB.funcionario.dtNascimento}" id="dtnascimento" style="width: 450px;" pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                    <p:calendar value="#{funcionarioMB.funcionario.dtNascimento}" id="dtnascimento" style="width: 150px;" pattern="dd/MM/yyyy" locale="pt_BR"/>
                                     <p:message for="dtnascimento"/>
                                 </td>
                             </tr>
@@ -55,7 +56,7 @@
                             <td>Sexo</td> 
                                 <td>
                                     <p:selectOneMenu id="console" value="#{funcionarioMB.funcionario.sexo}" style="width:125px">
-                                        <f:selectItem itemLabel="Select" itemValue="" />
+                                        <f:selectItem itemLabel="Selecione" itemValue="" />
                                         <f:selectItem itemLabel="Masculino" itemValue="1" />
                                         <f:selectItem itemLabel="Feminino" itemValue="2" />
                                         <f:selectItem itemLabel="Não se Aplica" itemValue="3" />
@@ -70,23 +71,23 @@
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <p:inputText value="#{funcionarioMB.funcionario.email}" id="email" style="width: 450px;" />
+                                    <p:inputText value="#{funcionarioMB.funcionario.email}" id="email" style="width: 200px;" />
                                     <p:message for="email"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Telefone</td>
                                 <td>
-                                    <p:inputText value="#{funcionarioMB.funcionario.telefone}" id="tel" style="width: 450px;">
-                                    </p:inputText>
+                                    <p:inputMask value="#{funcionarioMB.funcionario.telefone}"  mask="(99) 9999-9999" id="tel" style="width: 200px;"/>
+                                    
                                     <p:message for="tel"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Celular</td>
                                 <td>
-                                    <p:inputText value="#{funcionarioMB.funcionario.celular}" id="cel" style="width: 450px;">
-                                    </p:inputText>
+                                    <p:inputMask value="#{funcionarioMB.funcionario.celular}" id="cel" mask="(99) 99999-9999" style="width: 200px;"/>
+                                    
                                     <p:message for="cel"/>
                                 </td>
                             </tr>
@@ -95,31 +96,23 @@
                     <p:tab title="Endereços">
                         <p:dataTable value="#{funcionarioMB.funcionario.enderecos}" var="endereco" emptyMessage="" id="endTable" sortOrder="descending">
                            
-                            <p:column headerText="Cep" >
+                            <p:column headerText="Cep" width="50">
                                 <h:outputText value="#{endereco.cep}" />
                             </p:column>
-                            
-                            <p:column headerText="Uf" >
-                                <h:outputText value="#{endereco.cidade.uf.sigla}" />
-                            </p:column>
-                            
-                            <p:column headerText="Cidade" >
-                                <h:outputText value="#{endereco.cidade.cidade}" />
-                            </p:column>
-                            
-                            <p:column headerText="Endereço" >
+                                
+                            <p:column headerText="Endereço" width="100">
                                 <h:outputText value="#{endereco.endereco}" />
                             </p:column>
                             
-                            <p:column headerText="Bairro" >
+                            <p:column headerText="Bairro" width="100">
                                 <h:outputText value="#{endereco.bairro}" />
                             </p:column>
                             
-                            <p:column headerText="Número" >
+                            <p:column headerText="Número" width="20">
                                 <h:outputText value="#{endereco.numero}" />
                             </p:column>
                             
-                            <p:column headerText="Complemento" >
+                            <p:column headerText="Complemento"  width="50">
                                 <h:outputText value="#{endereco.complemento}" />
                             </p:column>
                             
@@ -137,7 +130,7 @@
             </p:fieldset>
 
                 <span style="float: left; background-color: #EEEEEE; text-align: left;">
-                    <p:commandButton id="botaoSalvar" action="#{funcionarioMB.cadastrarAtualizar()}" value="Salvar" icon="ui-icon-disk" />
+                    <p:commandButton id="botaoSalvar" action="#{funcionarioMB.cadastrarAtualizar()}" value="Salvar"  update="growl"  icon="ui-icon-disk" />
                 </span>
         
         </h:form>
@@ -153,8 +146,7 @@
                             <h:outputLabel value="Cep"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{funcionarioMB.endereco.cep}" id="cep" style="width: 100px;">
-                            </p:inputText>
+                            <p:inputMask value="#{funcionarioMB.endereco.cep}" id="cep" mask="99.999-999" style="width: 100px;"/>
                             <p:message for="cep"/>
                         </p:column>
                     </p:row>
@@ -164,7 +156,7 @@
                             <h:outputLabel value="Endereço"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{funcionarioMB.endereco.endereco}" id="end" style="width: 100px;">
+                            <p:inputText value="#{funcionarioMB.endereco.endereco}" id="end" style="width: 350px;">
                             </p:inputText>
                             <p:message for="end"/>
                         </p:column>
@@ -175,7 +167,7 @@
                             <h:outputLabel value="Bairro"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{funcionarioMB.endereco.bairro}" id="bairro" style="width: 100px;">
+                            <p:inputText value="#{funcionarioMB.endereco.bairro}" id="bairro" style="width: 350px;">
                             </p:inputText>
                             <p:message for="bairro"/>
                         </p:column>
@@ -186,7 +178,7 @@
                             <h:outputLabel value="Número"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{funcionarioMB.endereco.numero}" id="numero" style="width: 100px;">
+                            <p:inputText value="#{funcionarioMB.endereco.numero}" id="numero" style="width: 50px;">
                             </p:inputText>
                             <p:message for="numero"/>
                         </p:column>
@@ -197,7 +189,7 @@
                             <h:outputLabel value="Complemento"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{funcionarioMB.endereco.complemento}" id="complemento" style="width: 100px;">
+                            <p:inputText value="#{funcionarioMB.endereco.complemento}" id="complemento" style="width: 250px;">
                             </p:inputText>
                             <p:message for="complemento"/>
                         </p:column>

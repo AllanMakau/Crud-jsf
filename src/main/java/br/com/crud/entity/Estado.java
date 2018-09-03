@@ -5,11 +5,16 @@
  */
 package br.com.crud.entity;
 
+
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 
 /**
@@ -23,11 +28,13 @@ public class Estado implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String Estado;
-    
+    @NotEmpty(message = "{estado.nome.notempty}")
+    private String estado;
+    @NotEmpty(message = "{estado.sigla.notempty}")
     private String sigla;
     
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")
+    List<Cidade> cidades;
 
     public Estado() {
     }
@@ -41,19 +48,28 @@ public class Estado implements Serializable{
     }
 
     public String getEstado() {
-        return Estado;
+        return estado;
     }
 
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
+  
     public String getSigla() {
         return sigla;
     }
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
+    }
+
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
     }
     
     
